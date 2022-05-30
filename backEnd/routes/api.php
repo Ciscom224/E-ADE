@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\MembreController;
 
 
 /*
@@ -37,3 +38,8 @@ Route::match(['get','post'],'post/{id}',[PostController::class,'destroy']);
 ****   ROUTER FOR THE MEMBRE MODEL  ***||________|
 ****                              ***||
 *************************************/
+
+Route::match(['get','post'],'membre/store',[MembreController::class,'store']);
+Route::match(['get','post'],'getAll/membres',[MembreController::class,'index']);
+Route::match(['get','post'],'get/membre/{id}',[MembreController::class,'show']);
+Route::match(['get','post'],'membre/delete/{id}',[MembreController::class,'destroy']);
