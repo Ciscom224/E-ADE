@@ -19,6 +19,7 @@ class CreateMembresTable extends Migration
             $table->string('last_name',50);
             $table->string('filiere',20);
             $table->string('level',30);
+            $table->boolean('is_validate')->default(0);
             $table->string('password',30);
             $table->timestamps();
 

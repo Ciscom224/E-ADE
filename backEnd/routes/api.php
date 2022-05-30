@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 
 /*
@@ -18,3 +19,21 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+//                                           \/
+/** *********************************||     (_-_)
+****                              ***||______| |
+****   ROUTER FOR THE POST MODEL  ***||________|
+****                              ***||
+*************************************/
+Route::match(['get','post'],'store/post/{id}',[PostController::class,'store']);
+Route::match(['get','post'],'getAll/post',[PostController::class,'index']);
+Route::match(['get','post'],'get/post/{id}',[PostController::class,'show']);
+Route::match(['get','post'],'getAll/comments/{id}',[PostController::class,'postAnwsers']);
+Route::match(['get','post'],'post/{id}',[PostController::class,'destroy']);
+
+
+/** *********************************||     (_-_)
+****                              ***||______| |
+****   ROUTER FOR THE MEMBRE MODEL  ***||________|
+****                              ***||
+*************************************/

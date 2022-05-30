@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Teacher;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-class TeacherController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +15,11 @@ class TeacherController extends Controller
     public function index()
     {
         //
-        $list_teacher=Teacher::all();
+        $posts=Post::all();
+
         return response()->json([
-            'status'=>224,
-            'list_teacher'=>$list_teacher,
+            'code'=>201,
+            'posts'=>$posts
         ]);
     }
 
@@ -42,14 +42,14 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
         //
-        $teacher=new Teacher();
-        $teacher->first_name=htmlspecialchars($request->input('first_name')) ;
-        $teacher->last_name=htmlspecialchars($request->input('last_name')) ;
-        $teacher->email=htmlspecialchars($request->input('email')) ;
-        $teacher->save();
+
+        DB::table('posts')->insert([
+            'container'=>htmlentities($request->input('container')),
+            'sender'=>htmlentities($request->input('sender')),
+        ]);
         return response()->json([
-            'status'=>224,
-            'message'=>"Le professeur est bien ajouté !!!"
+            'code'=>210,
+            'message'=>'Votre message a ete poster',
         ]);
     }
 
@@ -62,22 +62,29 @@ class TeacherController extends Controller
     public function show($id)
     {
         //
-        $teacher=DB::table('teachers')->find($id);
+        $post=DB::table('posts')->where('id',$id)->first();
+
         return response()->json([
-            'status'=>224,
-            'teacher'=>$teacher,
+            'post'=>$post,
+            'code'=>210,
         ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * return all anwsers for a post $id
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function postAnwsers($id)
     {
         //
+        $comments=DB::table('comments')->where('id_post',$id)->get();
+
+        return response()->json([
+            'code'=>201,
+            'comments'=>$comments,
+        ]);
     }
 
     /**
@@ -90,16 +97,6 @@ class TeacherController extends Controller
     public function update(Request $request, $id)
     {
         //
-        DB::table('teachers')->where('teacher_id',$id)->update([
-            'first_name'=>$request->input('first_name'),
-            'last_name'=>$request->input('last_name'),
-            'email'=>$request->input('email'),
-        ]);
-
-        return response()->json([
-            'status'=>224,
-            'message'=> "Modification recue !!!"
-        ]);
     }
 
     /**
@@ -111,13 +108,13 @@ class TeacherController extends Controller
     public function destroy($id)
     {
         //
-        DB::table('teachers')->where('teacher_id',$id)->delete();
-        return response()->json([
-            'status'=>224,
-            'message'=>"Le Professeur est supprimé"
-        ]);
-    }
 
-    //authentification pour le professeur
-    
+        DB::table('posts')->where('id',$id)->delete();
+
+        return response()->json([
+            'code'=>210,
+            'message'=> 'Votre message a ete supprimer'
+        ]);
+
+   }
 }
