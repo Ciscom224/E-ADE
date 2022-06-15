@@ -20,22 +20,12 @@ class CreateMembresTable extends Migration
             $table->string('filiere',20);
             $table->string('level',30);
             $table->boolean('is_validate')->default(0);
-            $table->string('password',30);
+            $table->boolean('is_admin')->default(0);
+            $table->string('password',100);
             $table->timestamps();
 
 
 
-
-        });
-
-        Schema::table('membres', function($table)
-        {
-            $table->string('id_job');
-            $table->foreign('id_job')
-                        ->references('id_job')
-                        ->on('jobs')
-                        ->onDelete('cascade')
-                        ->onUpdate('cascade');
 
         });
     }

@@ -22,14 +22,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //                                           \/
 /** *********************************||     (_-_)
-****                              ***||______| |
+****                               ***||______| |
 ****   ROUTER FOR THE POST MODEL  ***||________|
 ****                              ***||
 *************************************/
-Route::match(['get','post'],'store/post/{id}',[PostController::class,'store']);
+Route::match(['get','post'],'store/post',[PostController::class,'store']);
 Route::match(['get','post'],'getAll/post',[PostController::class,'index']);
 Route::match(['get','post'],'get/post/{id}',[PostController::class,'show']);
-Route::match(['get','post'],'getAll/comments/{id}',[PostController::class,'postAnwsers']);
+Route::match(['get','post'],'getAll_post_comments/{id_post}',[PostController::class,'postAnwsers']);
+Route::match(['get','post'],'add_comment',[PostController::class,'anwser_post']);
+
 Route::match(['get','post'],'post/{id}',[PostController::class,'destroy']);
 
 
@@ -41,5 +43,17 @@ Route::match(['get','post'],'post/{id}',[PostController::class,'destroy']);
 
 Route::match(['get','post'],'membre/store',[MembreController::class,'store']);
 Route::match(['get','post'],'getAll/membres',[MembreController::class,'index']);
-Route::match(['get','post'],'get/membre/{id}',[MembreController::class,'show']);
-Route::match(['get','post'],'membre/delete/{id}',[MembreController::class,'destroy']);
+Route::match(['get','post'],'get/membre/{cne}',[MembreController::class,'show']);
+Route::match(['get','post'],'membre/delete/{cne}',[MembreController::class,'destroy']);
+Route::match(['get','post'],'membre/validate/{cne}',[MembreController::class,'validate_membre']);
+
+
+/** ***************************************||     (_-_)
+****                                    ***||______| |
+****   ROUTER FOR THE Formations MODEL  ***||________|
+****                                    ***||
+********************************************/
+
+Route::match(['get','post'],'formation/store',[FormationController::class,'store']);
+Route::match(['get','post'],'formation/getAll',[FormationController::class,'index']);
+Route::match(['get','post'],'formation/delete/{$id}',[FormationController::class,'destroy']);

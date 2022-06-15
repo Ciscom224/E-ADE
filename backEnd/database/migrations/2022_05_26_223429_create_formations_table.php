@@ -18,7 +18,7 @@ class CreateFormationsTable extends Migration
             $table->string('subject',50);
             $table->string('teacher',40);
             $table->integer('limit_number');
-            $table->boolean('is_certificat');
+            $table->boolean('is_certificat')->default(0);
             $table->text('description');
             $table->string('url_image',30);
             $table->date('dat_e');

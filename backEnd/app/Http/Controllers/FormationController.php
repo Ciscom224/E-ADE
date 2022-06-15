@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Formation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-class PostController extends Controller
+
+class FormationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +16,11 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts=Post::all();
+        $formations=Formation::all();
 
         return response()->json([
-            'code'=>201,
-            'posts'=>$posts
+            'formations'=>$formations,
+            'code'=>224
         ]);
     }
 
@@ -42,15 +43,24 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        DB::table('formations')->updateOrInsert(
+            [
+                'id_formation'=>htmlspecialchars($request->input('id_formation')),
+                'subject'=>htmlspecialchars($request->input('subject')),
+            ],
+            [
+                'teacher'=>htmlspecialchars($request->input('teacher')),
+                'limit_number'=>htmlspecialchars($request->input('limit_number')),
+                'is_certificat'=>htmlspecialchars($request->input('is_certificat')),
+                'description'=>htmlspecialchars($request->input('description')),
+                'url_image'=>htmlspecialchars($request->input('url_image')),
+                'dat_e'=>htmlspecialchars($request->input('dat_e')),
 
-        DB::table('posts')->insert([
-            'container'=>htmlentities($request->input('container')),
-            'sender'=>htmlentities($request->input('sender')),
-        ]);
-        return response()->json([
-            'code'=>210,
-            'message'=>'Votre message a ete poster',
-        ]);
+            ]);
+            return response()->json([
+                'code'=>224,
+                'message'=>'Formation est ajoutée'
+            ]);
     }
 
     /**
@@ -62,42 +72,24 @@ class PostController extends Controller
     public function show($id)
     {
         //
-        $post=DB::table('posts')->where('id',$id)->first();
+        $formation=DB::table('users')->where('id',$id)->first();
 
         return response()->json([
-            'post'=>$post,
-            'code'=>210,
+            'formation'=>$formation,
         ]);
     }
 
     /**
-     * return all anwsers for a post $id
+     * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function postAnwsers($id_post)
+    public function edit($id)
     {
         //
-        $comments=DB::table('comments')->where('id_post',$id_post)->get();
-
-        return response()->json([
-            'code'=>201,
-            'comments'=>$comments,
-        ]);
     }
-   // ansers for post
-   public function anwser_post(Request $request){
-    DB::table('comments')->insert([
-        'anwser'=> htmlentities($request->input('anwser')),
-        'id_post'=>htmlentities($request->input('id_post')),
-        'owner'=> htmlentities($request->input('owner')),
 
-    ]);
-    return response()->json([
-        'message'=>'commenter ajouter'
-    ]);
-}
     /**
      * Update the specified resource in storage.
      *
@@ -108,8 +100,14 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        //DB::table('formations')->find($id)->update()
     }
 
+    //--------------funtion for add user in a formation---
+    public function addUserFormation($idFormation,$user)
+    {
+
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -119,16 +117,10 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
-
-        DB::table('posts')->where('id',$id)->delete();
-
+        DB::table('formations')->find($id)->delete();
         return response()->json([
-            'code'=>210,
-            'message'=> 'Votre message a ete supprimer'
+        'code'=>224,
+            'message'=>'formation supprimée'
         ]);
-
-   }
-
-
-
+    }
 }

@@ -53,7 +53,7 @@ class MembreController extends Controller
                 'last_name'=>htmlspecialchars($request->input('last_name')),
                 'filiere'=>htmlspecialchars($request->input('filiere')),
                 'level'=>htmlspecialchars($request->input('level')),
-                'password'=>htmlspecialchars($request->input('password')),
+                'password'=>sha1(htmlspecialchars($request->input('password'))),
 
             ]
             );
@@ -62,6 +62,18 @@ class MembreController extends Controller
                 'message'=>'Votre demande a ete envoyer avec succes',
             ]);
     }
+   // function for validate a membre
+   public function validate_membre($cne){
+
+        DB::table('membres')->where('cne',$cne)->update([
+            'is_validate'=>1,
+        ]);
+
+        return response()->json([
+            'message'=>'le membre a ete valider',
+        ]);
+   }
+
 
     /**
      * Display the specified resource.
@@ -69,10 +81,10 @@ class MembreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($cne)
     {
         //
-        $membre=DB::table('membres')->find($id);
+        $membre=DB::table('membres')->where('cne',$cne)->first();
 
         return response()->json([
             'code'=>210,
@@ -110,13 +122,14 @@ class MembreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($cne)
     {
         //
-        DB::table('membres')->where('id',$id)->delete();
+        DB::table('membres')->where('cne',$cne)->delete();
         return response()->json([
             'code'=>210,
             'message'=>'Ce membre a ete supprimer avec succes'
         ]);
     }
+
 }

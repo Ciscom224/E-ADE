@@ -19,7 +19,7 @@ class CreateCommentsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('posts', function($table)
+        Schema::table('comments', function($table)
         {
             $table->string('owner');
             $table->foreign('owner')
@@ -29,7 +29,7 @@ class CreateCommentsTable extends Migration
                         ->onUpdate('cascade');
 
 
-            $table->string('id_post');
+            $table->integer('id_post');
             $table->foreign('id_post')
                         ->references('id')
                         ->on('posts')
