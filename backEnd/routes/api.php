@@ -3,7 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MembreController;
+use App\Http\Controllers\FormationController;
 
 
 /*
@@ -22,10 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //                                           \/
 /** *********************************||     (_-_)
-****                               ***||______| |
+****                              ***||______| |
 ****   ROUTER FOR THE POST MODEL  ***||________|
 ****                              ***||
-*************************************/
+************/
 Route::match(['get','post'],'store/post',[PostController::class,'store']);
 Route::match(['get','post'],'getAll/post',[PostController::class,'index']);
 Route::match(['get','post'],'get/post/{id}',[PostController::class,'show']);
@@ -57,10 +59,13 @@ Route::match(['get','post'],'membre/validate/{cne}',[MembreController::class,'va
 Route::match(['get','post'],'formation/store',[FormationController::class,'store']);
 Route::match(['get','post'],'formation/getAll',[FormationController::class,'index']);
 Route::match(['get','post'],'formation/delete/{$id}',[FormationController::class,'destroy']);
+//auth routing
+Route::match(['get','post'],'login',[AuthController::class,'login']);
 
-//  router for infos
-Route::match(['get','post'],'information/getAll',[FormationController::class,'information_index']);
-Route::match(['get','post'],'information/store',[FormationController::class,'store_information']);
-Route::match(['get','post'],'information/update/{$id}',[FormationController::class,'update_information']);
-Route::match(['get','post'],'information/show/{$id}',[FormationController::class,'information_show']);
-Route::match(['get','post'],'information/delete/{$id}',[FormationController::class,'information_delete']);
+
+Route::match(['get','post'],'logout',[AuthController::class,'logout']);
+//protected route
+Route::group(['middleware'=>['auth:sanctum']],function(){
+    Route::post('/logout',[AuthController::class,'logout']);
+});
+

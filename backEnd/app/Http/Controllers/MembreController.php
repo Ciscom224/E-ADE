@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Membre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class MembreController extends Controller
 {
@@ -53,7 +54,7 @@ class MembreController extends Controller
                 'last_name'=>htmlspecialchars($request->input('last_name')),
                 'filiere'=>htmlspecialchars($request->input('filiere')),
                 'level'=>htmlspecialchars($request->input('level')),
-                'password'=>sha1(htmlspecialchars($request->input('password'))),
+                'password'=>bcrypt(htmlspecialchars($request->input('password'))),
 
             ]
             );
