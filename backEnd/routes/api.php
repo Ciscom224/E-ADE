@@ -46,8 +46,8 @@ Route::match(['get','post'],'post/{id}',[PostController::class,'destroy']);
 Route::match(['get','post'],'membre/store',[MembreController::class,'store']);
 Route::match(['get','post'],'getAll/membres',[MembreController::class,'index']);
 Route::match(['get','post'],'get/membre/{cne}',[MembreController::class,'show']);
-Route::match(['get','post'],'membre/delete/{cne}',[MembreController::class,'destroy']);
-Route::match(['get','post'],'membre/validate/{cne}',[MembreController::class,'validate_membre']);
+
+
 
 
 /** ***************************************||     (_-_)
@@ -55,10 +55,9 @@ Route::match(['get','post'],'membre/validate/{cne}',[MembreController::class,'va
 ****   ROUTER FOR THE Formations MODEL  ***||________|
 ****                                    ***||
 ********************************************/
-
-Route::match(['get','post'],'formation/store',[FormationController::class,'store']);
 Route::match(['get','post'],'formation/getAll',[FormationController::class,'index']);
-Route::match(['get','post'],'formation/delete/{$id}',[FormationController::class,'destroy']);
+
+
 //auth routing
 Route::match(['get','post'],'login',[AuthController::class,'login']);
 
@@ -67,5 +66,10 @@ Route::match(['get','post'],'logout',[AuthController::class,'logout']);
 //protected route
 Route::group(['middleware'=>['auth:sanctum']],function(){
     Route::post('/logout',[AuthController::class,'logout']);
+    Route::match(['get','post'],'membre/validate/{cne}',[MembreController::class,'validate_membre']);
+    Route::match(['get','post'],'formation/store',[FormationController::class,'store']);
+   
+    Route::match(['get','post'],'membre/delete/{cne}',[MembreController::class,'destroy']);
+    Route::match(['get','post'],'formation/delete/{$id}',[FormationController::class,'destroy']);
 });
 
