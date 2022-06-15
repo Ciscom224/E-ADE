@@ -63,3 +63,4 @@ Route::match(['get','post'],'information/getAll',[FormationController::class,'in
 Route::match(['get','post'],'information/store',[FormationController::class,'store_information']);
 Route::match(['get','post'],'information/update/{$id}',[FormationController::class,'update_information']);
 Route::match(['get','post'],'information/show/{$id}',[FormationController::class,'information_show']);
+Route::match(['get','post'],'information/delete/{$id}',[FormationController::class,'information_delete']);

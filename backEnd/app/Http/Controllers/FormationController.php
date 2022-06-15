@@ -170,4 +170,12 @@ class FormationController extends Controller
             'info'=>$info
         ]);
     }
+
+    public function information_delete($id){
+        DB::table('informations')->where('id',$id)->delete();
+
+        return response()->json([
+            'message'=>'info supprimee',
+        ]);
+    }
 }
