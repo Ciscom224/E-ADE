@@ -56,6 +56,12 @@ Route::match(['get','post'],'get/membre/{cne}',[MembreController::class,'show'])
 ****                                    ***||
 ********************************************/
 Route::match(['get','post'],'formation/getAll',[FormationController::class,'index']);
+//  router for infos
+Route::match(['get','post'],'information/getAll',[FormationController::class,'information_index']);
+
+Route::match(['get','post'],'information/update/{$id}',[FormationController::class,'update_information']);
+Route::match(['get','post'],'information/show/{$id}',[FormationController::class,'information_show']);
+
 
 
 //auth routing
@@ -71,5 +77,8 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
    
     Route::match(['get','post'],'membre/delete/{cne}',[MembreController::class,'destroy']);
     Route::match(['get','post'],'formation/delete/{$id}',[FormationController::class,'destroy']);
+
+    Route::match(['get','post'],'information/store',[FormationController::class,'store_information']);
+    Route::match(['get','post'],'information/delete/{$id}',[FormationController::class,'information_delete']);
 });
 
