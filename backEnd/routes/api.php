@@ -57,3 +57,9 @@ Route::match(['get','post'],'membre/validate/{cne}',[MembreController::class,'va
 Route::match(['get','post'],'formation/store',[FormationController::class,'store']);
 Route::match(['get','post'],'formation/getAll',[FormationController::class,'index']);
 Route::match(['get','post'],'formation/delete/{$id}',[FormationController::class,'destroy']);
+
+//  router for infos
+Route::match(['get','post'],'information/getAll',[FormationController::class,'information_index']);
+Route::match(['get','post'],'information/store',[FormationController::class,'store_information']);
+Route::match(['get','post'],'information/update/{$id}',[FormationController::class,'update_information']);
+Route::match(['get','post'],'information/show/{$id}',[FormationController::class,'information_show']);
