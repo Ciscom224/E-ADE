@@ -34,8 +34,7 @@ function Comments(props) {
   const fetchAllComments = () => {
     https.get(`/getAll_post_comments/2`).then((res) => {
       setCom(res.data.comments);
-      coms=res.data.comments;
-      console.log(res.data.comments);
+   
     });
   };
   useEffect(() => {
@@ -48,7 +47,7 @@ function Comments(props) {
         <Accordion.Body>
           <div className="reponse">
             {coms.map((com)=>{
-              <h1>{com.id}</h1>
+              return <h1>{com.anwser}</h1>
             })}
 
           </div>

@@ -39,6 +39,8 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        dd($request);
+
 
         DB::table('posts')->insert([
             'container'=>htmlentities($request->input('container')),

@@ -11,7 +11,7 @@ import Comments from "../components/comments";
 function ForumScreen() {
   const [posts, setPosts] = useState([]);
 
-  const [inputs, setInputs] = useState([]);
+  const [inputs, setInputs] = useState({});
 
   useEffect(() => {
     fetchAllPosts();
@@ -20,7 +20,8 @@ function ForumScreen() {
   const fetchAllPosts = () => {
     https.get("/getAll/post").then((res) => {
       setPosts(res.data);
-      console.log(res.data);
+
+      // console.log(res.data);
     });
   };
 
@@ -28,16 +29,19 @@ function ForumScreen() {
     const content = event.target.content;
     const sender = 10;
 
-    setInputs((values) => ({ ...values, [content]: sender }));
+    // setInputs((values) => ());
   };
   const submitFor = () => {
+  
     console.log(inputs);
-    // https.post("http://127.0.0.1:8000/api/add_comment",inputs).then((res) => {
-    //   });    
+    https.post("/store/post",inputs).then((res) => {
+      console.log(res);
+      });
   };
+  console.log(posts);
   return (
     <div className="container-fuild">
-      <HeadForum titleHead="ADE - FORUM"/>
+      <HeadForum titleHead="ADE - FORUM" />
       <div className="row ">
         <div className="col-md-4 col-sm-3">
           <Pub />
@@ -47,8 +51,12 @@ function ForumScreen() {
             <textarea
               className="form-control"
               name="content"
-              value={inputs.content}
-              onChange={handleChange}
+              onChange={(e)=>{
+                setInputs({
+                  sender:10,
+                  container:e.target.value
+                })
+              }}
               placeholder="Leave a comment here"
               id="floatingTextarea2"
             ></textarea>
@@ -60,34 +68,35 @@ function ForumScreen() {
         </div>
 
         <div className="postData">
-          {posts.map((post) => {
-            <h1>bien</h1>;
-          })}
           <h1>Les messages reccents</h1>
           <div>
             <ListGroup as="ul">
-              <ListGroup.Item
-                as="li"
-                className="d-flex justify-content-between align-items-start"
-              >
-                <div className="ms-2 me-auto">
-                  <div className="fw-bold">Mamadou Cissé</div>
-                  <div className="bodyAll">
-                    <div className=" postItem">
-                      <div className="item">le message de mamadou cisse</div>
-                      <div className="item">
-                        <Model id_post={1} />
+            {posts.map((post) => {
+                  return   <ListGroup.Item
+                  as="li"
+                  className="d-flex justify-content-between align-items-start"
+                >
+                 
+                  <div className="ms-2 me-auto">
+                    <div className="fw-bold">Mamadou Cissé</div>
+                    <div className="bodyAll">
+                      <div className=" postItem">
+                        <div className="item">{post.container}</div>
+                        <div className="item">
+                          <Model id_post={1} />
+                        </div>
+                      </div>
+                      <div className="comment">
+                        <Comments id_post={post.id}/>
                       </div>
                     </div>
-                    <div className="comment">
-                      <Comments />
-                    </div>
                   </div>
-                </div>
-                <Badge bg="danger" pill>
-                  {3}
-                </Badge>
-              </ListGroup.Item>
+                  <Badge bg="danger" pill>
+                    {3}
+                  </Badge>
+                </ListGroup.Item>;
+                })}
+            
             </ListGroup>
           </div>
         </div>
