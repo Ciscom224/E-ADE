@@ -1,0 +1,22 @@
+.presentation h3{
+ width: 100%;
+ padding: 1%;
+ margin-top: 2%;
+ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.202);
+ border-radius: 5px;
+}
+.presentation p{
+    letter-spacing: 2px;
+    text-align: center;
+
+}
+.presentation .photo{
+    background: #000;
+}
+.presentation h3{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+ul{
+    text-align: start;
+}

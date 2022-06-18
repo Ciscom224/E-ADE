@@ -1,0 +1,114 @@
+body{
+    display: flex;
+    display: inline;
+    overflow-x: hidden;
+}
+.head{
+    
+    width: 100%;
+    min-height: 70vh;
+    background: rgb(25, 31, 34);
+    background-image: url('');
+}
+.title{
+    font-family: Arial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10%;
+}
+.titleHead{
+    position: relative;
+    font-size: 4em;
+    font-weight: bold;
+    letter-spacing: 15px;
+    color: #0e3742;
+    text-transform: uppercase;
+    width: 100%;
+    text-align: center;
+    -webkit-box-reflect: below 1px linear-gradient(transparent,#0008);
+    line-height: 0.70em;
+    outline: none;
+    animation: animate 5s linear infinite;
+    
+}
+@keyframes animate{
+    0%,18%,20%,50.1%,60%,65.1%,80%,90.1%,92%{
+        color: #0e3742;
+        text-shadow: none;
+    }
+    18.1%,20.1%,30%,50%,60.1%,65%,80.1%,90%,92.1%,100%{
+        color: white;
+        text-shadow: 0 0 10px #03bcf4,
+                    0 0 20px #03bcf4,
+                    0 0 40px #03bcf4,
+                    0 0 50px #03bcf4,
+                    0 0 160px #03bcf4;
+    }
+}
+
+
+
+.reponse{
+    width: 100%;
+    height: auto;
+    margin: 0% !important;
+    font-size: 2em;
+    color: black;
+    padding: 2%;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.329);
+}
+.containerAn{
+    width: 100% !important;
+}
+.bodyAll{
+    margin-top: 2%;
+    width: 150vh;
+}
+
+/* body screen */
+
+#floatingTextarea2{
+    height: 200px;
+    max-height: 200px;
+    min-height: 150px;
+}
+.postItem{
+    display: flex;
+    justify-content: space-evenly;
+    justify-items: flex-end;
+}
+.item{
+    margin-left: 2%;
+    /* width: 100%; */
+}
+.item:nth-child(1){
+    font-size: 1.2em;
+
+}
+
+/*  responsible */
+@media  screen and (max-width: 500px) {
+    body{
+        overflow-x: hidden;
+    }
+	.head h2{
+        font-size: 1.5em;
+    }
+    .head{
+    
+        min-width: 100%;
+        min-height: 30vh;
+        background: rgb(25, 31, 34);
+        /* background-image: url(''); */
+    }
+    
+    .titleHead{
+        padding-top: 30%;
+    }
+    .bodyAll{
+        margin-top: 2%;
+        width: 45vh !important;
+    }
+}

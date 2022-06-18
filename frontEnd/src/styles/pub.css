@@ -1,0 +1,7 @@
+.video_pub{
+    height: 30vh;
+    border-radius: 10px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.321);
+    margin-top: 2%;
+}
