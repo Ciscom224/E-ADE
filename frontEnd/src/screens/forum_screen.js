@@ -78,7 +78,7 @@ function ForumScreen() {
                 >
                  
                   <div className="ms-2 me-auto">
-                    <div className="fw-bold">Mamadou Cissé</div>
+                    <div className="fw-bold">{post.id}</div>
                     <div className="bodyAll">
                       <div className=" postItem">
                         <div className="item">{post.container}</div>

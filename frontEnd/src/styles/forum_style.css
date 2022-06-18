@@ -111,4 +111,7 @@ body{
         margin-top: 2%;
         width: 45vh !important;
     }
+    .itemCom p{
+        font-size: 5px;
+    }
 }

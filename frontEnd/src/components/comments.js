@@ -1,6 +1,6 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import https from "../https";
-import { Card, AccordionContext ,ListGroup} from "react-bootstrap";
+import { Card, AccordionContext, ListGroup } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
@@ -28,13 +28,9 @@ function ContextAwareToggle({ children, eventKey, callback }) {
 function Comments(props) {
   const [coms, setCom] = useState([]);
 
-  
-
-
   const fetchAllComments = () => {
-    https.get(`/getAll_post_comments/2`).then((res) => {
+    https.get(`/getAll_post_comments/` + props.id_post).then((res) => {
       setCom(res.data.comments);
-   
     });
   };
   useEffect(() => {
@@ -46,13 +42,17 @@ function Comments(props) {
         <Accordion.Header className="hea">Les Commentaires</Accordion.Header>
         <Accordion.Body>
           <div className="reponse">
-            {coms.map((com)=>{
-              return <h1>{com.anwser}</h1>
+            {coms.map((com) => {
+              return (
+                <div className="itemCom">
+                  <span>{com.owner}</span>
+                  <p>
+                    {com.anwser}
+                  </p>
+                </div>
+              );
             })}
-
           </div>
-            
-          
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>
