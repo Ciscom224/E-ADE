@@ -19,16 +19,16 @@ use App\Http\Controllers\FormationController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 //                                           \/
 /** *********************************||     (_-_)
 ****                              ***||______| |
 ****   ROUTER FOR THE POST MODEL  ***||________|
 ****                              ***||
 ************/
-Route::match(['get','post'],'store/post',[PostController::class,'store']);
+Route::post('store/post',[PostController::class,'store']);
 Route::match(['get','post'],'getAll/post',[PostController::class,'index']);
 Route::match(['get','post'],'get/post/{id}',[PostController::class,'show']);
 Route::match(['get','post'],'getAll_post_comments/{id_post}',[PostController::class,'postAnwsers']);
@@ -74,11 +74,10 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
     Route::post('/logout',[AuthController::class,'logout']);
     Route::match(['get','post'],'membre/validate/{cne}',[MembreController::class,'validate_membre']);
     Route::match(['get','post'],'formation/store',[FormationController::class,'store']);
-   
+
     Route::match(['get','post'],'membre/delete/{cne}',[MembreController::class,'destroy']);
     Route::match(['get','post'],'formation/delete/{$id}',[FormationController::class,'destroy']);
 
     Route::match(['get','post'],'information/store',[FormationController::class,'store_information']);
     Route::match(['get','post'],'information/delete/{$id}',[FormationController::class,'information_delete']);
 });
-
