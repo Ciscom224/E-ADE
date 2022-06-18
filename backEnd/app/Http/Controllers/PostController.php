@@ -17,10 +17,7 @@ class PostController extends Controller
         //
         $posts=Post::all();
 
-        return response()->json([
-            'code'=>201,
-            'posts'=>$posts
-        ]);
+        return response()->json(Post::get());
     }
 
     /**
